@@ -24,14 +24,16 @@ class TracIKProc(mp.Process):
         super().__init__()
         self.output_queue = output_queue
         self.input_queue = mp.Queue()
-        self.ik_solver = TracIKSolver(
-            urdf_file,
-            base_link,
-            tip_link,
-            timeout,
-            epsilon,
-            solve_type,
-        )
+        self._ik_solver = None
+        self._ik_solver_args = (urdf_file, base_link, tip_link, timeout, epsilon, solve_type)
+
+    @property
+    def ik_solver(self):
+        if self._ik_solver is not None:
+            return self._ik_solver
+
+        self._ik_solver = TracIKSolver(*self._ik_solver_args)
+        return self._ik_solver
 
     def _ik(self, ee_pose, qinit, bx, by, bz, brx, bry, brz):
         return self.ik_solver.ik(ee_pose, qinit, bx, by, bz, brx, bry, brz)

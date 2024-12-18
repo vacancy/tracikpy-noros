@@ -37,7 +37,7 @@
 #include "urdf/model.h"
 
 #ifndef KDL_PARSER_PRINT_DEBUG
-#define KDL_PARSER_PRINT_DEBUG 1
+#define KDL_PARSER_PRINT_DEBUG 0
 #endif
 
 #ifndef KDL_PARSER_PRINT_WARNING
@@ -91,7 +91,7 @@ KDL::Joint toKdl(urdf::JointSharedPtr jnt)
         return KDL::Joint(jnt->name, F_parent_jnt.p, F_parent_jnt.M * axis, KDL::Joint::TransAxis);
       }
     default: {
-        if (KDL_PARSER_PRINT_WARNING) fprintf(stderr, "Warning: Converting unknown joint type of joint '%s' into a fixed joint", jnt->name.c_str());
+        if (KDL_PARSER_PRINT_WARNING) fprintf(stderr, "Warning: Converting unknown joint type of joint '%s' into a fixed joint\n", jnt->name.c_str());
         return KDL::Joint(jnt->name, KDL::Joint::None);
       }
   }
@@ -134,7 +134,7 @@ bool addChildrenToTree(urdf::LinkConstSharedPtr root, KDL::Tree & tree)
 {
   std::vector<urdf::LinkSharedPtr> children = root->child_links;
   if (KDL_PARSER_PRINT_DEBUG) {
-    fprintf(stderr, "DEBUG: Link %s had %zu children.", root->name.c_str(), children.size());
+    fprintf(stderr, "DEBUG: Link %s had %zu children.\n", root->name.c_str(), children.size());
   }
 
   // constructs the optional inertia
@@ -177,7 +177,7 @@ bool treeFromString(const std::string & xml, KDL::Tree & tree)
   urdf::Model robot_model;
   if (!robot_model.initString(xml.c_str())) {
     if (KDL_PARSER_PRINT_ERROR) {
-      fprintf(stderr, "ERROR: Could not generate robot model.");
+      fprintf(stderr, "ERROR: Could not generate robot model.\n");
     }
     return false;
   }
@@ -198,7 +198,7 @@ bool treeFromUrdfModel(const urdf::ModelInterface & robot_model, KDL::Tree & tre
       fprintf(stderr,
         "WARNING: The root link %s has an inertia specified in the URDF, but KDL "
         "does not support a root link with an inertia.  As a workaround, you can add "
-        "an extra dummy link to your URDF.", robot_model.getRoot()->name.c_str()
+        "an extra dummy link to your URDF.\n", robot_model.getRoot()->name.c_str()
       );
     }
   }

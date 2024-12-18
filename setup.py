@@ -37,7 +37,7 @@ _trac_ik_wrap = Extension(
     ],
     libraries=["orocos-kdl", "nlopt", "tinyxml", "tinyxml2", "urdfdom_model"],
     swig_opts=["-c++", "-Itracikpy/include"],
-    extra_compile_args=["-std=c++11"],
+    extra_compile_args=["-std=c++11", "-DKDL_PARSER_PRINT_DEBUG=0"],
 )
 
 setup(
