@@ -1,6 +1,24 @@
 # Tracikpy
 [![status](https://github.com/mjd3/tracikpy/workflows/Release%20Tracikpy/badge.svg)](https://github.com/mjd3/tracikpy/actions) [![Coverage Status](https://coveralls.io/repos/github/mjd3/tracikpy/badge.svg?branch=main)](https://coveralls.io/github/mjd3/tracikpy?branch=main) [![style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
+## Installation on Mac
+
+This repo contains Python bindings for TracIK based on the ROS packages and SWIG bindings provided by TRACLabs [here](https://bitbucket.org/traclabs/trac_ik/src/master/) (see [paper](https://ieeexplore.ieee.org/document/7363472) for implementation details) and the updates provided by Clemens Eppner [here](https://bitbucket.org/clemi/trac_ik/src/devel/). For now, it only supports Ubuntu operating systems. The goal of this repo is to encapsulate these bindings into a Python package that can be easily installed using `pip` (with `numpy` as the only Python dependency) and can be used independently of ROS. This package does still contain several system-level dependencies (`eigen`, `orocos-kdl`, `nlopt`, `urdfdom`, and `kdl_parser`); if you have already installed ROS then these will be installed already. If not, you can install using `apt-get`:
+It has been modified from mjd3's version to be completely ROS-free and to work on MacOS. The following dependencies are required:
+
+```
+brew install eigen orocos-kdl nlopt urdfdom tinyxml
+```
+
+Clone the repo and install using `pip`:
+```shell
+git clone https://github.com/vacancy/tracikpy-noros
+pip install tracikpy/
+```
+This's it!
+
+## Installation on Linux
+
 This repo contains Python bindings for TracIK based on the ROS packages and SWIG bindings provided by TRACLabs [here](https://bitbucket.org/traclabs/trac_ik/src/master/) (see [paper](https://ieeexplore.ieee.org/document/7363472) for implementation details) and the updates provided by Clemens Eppner [here](https://bitbucket.org/clemi/trac_ik/src/devel/). For now, it only supports Ubuntu operating systems. The goal of this repo is to encapsulate these bindings into a Python package that can be easily installed using `pip` (with `numpy` as the only Python dependency) and can be used independently of ROS. This package does still contain several system-level dependencies (`eigen`, `orocos-kdl`, `nlopt`, `urdfdom`, and `kdl_parser`); if you have already installed ROS then these will be installed already. If not, you can install using `apt-get`:
 ```
 sudo apt-get install libeigen3-dev liborocos-kdl-dev libkdl-parser-dev liburdfdom-dev libnlopt-dev

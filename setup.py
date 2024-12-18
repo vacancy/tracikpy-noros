@@ -26,12 +26,16 @@ _trac_ik_wrap = Extension(
         "tracikpy/src/trac_ik.cpp",
         "tracikpy/src/nlopt_ik.cpp",
         "tracikpy/src/kdl_tl.cpp",
+        "third-party/urdf/src/model.cpp",
+        "third-party/kdl_parser/src/kdl_parser.cpp"
     ],
     include_dirs=[
         "tracikpy/include",
-        "/usr/include/eigen3",
+        "third-party/urdf/include",
+        "third-party/urdf_parser/include",
+        "third-party/kdl_parser/include",
     ],
-    libraries=["orocos-kdl", "nlopt", "urdf", "kdl_parser"],
+    libraries=["orocos-kdl", "nlopt", "tinyxml", "tinyxml2", "urdfdom_model"],
     swig_opts=["-c++", "-Itracikpy/include"],
     extra_compile_args=["-std=c++11"],
 )
