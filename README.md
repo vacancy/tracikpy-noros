@@ -13,7 +13,11 @@ brew install eigen orocos-kdl nlopt urdfdom tinyxml
 Clone the repo and install using `pip`:
 ```shell
 git clone https://github.com/vacancy/tracikpy-noros
-pip install tracikpy/
+cd tracikpy-noros
+# On MAC, homebrew-installed packages won't be added directly to the library paths
+export CPATH=/opt/homebrew/include:/opt/homebrew/include/eigen3:/opt/homebrew/include/urdfdom_headers
+export LIBRARY_PATH=/opt/homebrew/lib
+pip install .
 ```
 This's it!
 
